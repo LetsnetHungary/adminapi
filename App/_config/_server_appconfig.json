@@ -1,0 +1,20 @@
+{
+  "database" : {
+    "basic": {
+      "DB_TYPE" : "mysql",
+      "DB_HOST" : "localhost",
+      "DB_PORT" : "3306",
+      "DB_NAME" : "mvc",
+      "DB_USER" : "root",
+      "DB_PASS" : "mysql"
+    }
+    ,
+    "visitorsDB" : "mvc_Visitors",
+    "autchenticationDB" : "letsneth_authenticate",
+    "modulesDB" : "mvc",
+    "userDB" : "mvc"
+  },
+  "timezone" : "Europe/Budapest",
+  "firstpage" : "AuthTest",
+  "authentication" : "true"
+}

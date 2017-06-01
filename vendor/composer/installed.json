@@ -1,0 +1,26 @@
+[
+    {
+        "name": "letsnet/starter",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/LetsnetHungary/mvcstart.git",
+            "reference": "bf8c63c67743ded7f646d3aaa1e837e1d8ed4d15"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/LetsnetHungary/mvcstart/zipball/bf8c63c67743ded7f646d3aaa1e837e1d8ed4d15",
+            "reference": "bf8c63c67743ded7f646d3aaa1e837e1d8ed4d15",
+            "shasum": ""
+        },
+        "time": "2017-02-13T18:58:40+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "You must require this to your Letsnet MVC project..."
+    }
+]
