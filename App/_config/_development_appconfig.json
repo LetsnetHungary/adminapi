@@ -9,7 +9,7 @@
       "DB_PASS" : "mysql"
     }
     ,
-    "prodDB" : "rastaclat_prods",
+    "prodDB" : "products",
     "autchenticationDB" : "letsneth_authenticate",
     "modulesDB" : "letsneth_modules",
     "dataDB" : "letsneth_data"

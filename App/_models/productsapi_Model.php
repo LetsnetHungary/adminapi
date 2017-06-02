@@ -1,7 +1,12 @@
 <?php
     class productsapi_Model extends CoreApp\DataModel {
+
+      public $products;
+
       public function __construct() {
         parent::__construct();
+
+        $this->products = NULL;
       }
 
       public function getProductsByCategory($prod_categories, $position) {
@@ -153,12 +158,17 @@
         $stmt->execute(array(
           ":prod_id" => $prod_id
         ));
+
+        $sth = "";
+
         if($result = $stmt->fetchAll(PDO::FETCH_ASSOC)){
           $sth = $PRODDB->prepare("UPDATE prods SET prod_name = :prod_name, prod_price = :prod_price, outofstock = :outofstock WHERE prod_id = :prod_id");  
         }
         else {
           $sth = $PRODDB->prepare("INSERT INTO prods (prod_id, prod_name, prod_price, outofstock) VALUES (:prod_id, :prod_name, :prod_price, :outofstock)");    
         }
+
+        $outofstock = $outofstock == "false" ? 0 : 1;
 
         $sth->execute(array(
           ":prod_id" => $prod_id,
@@ -451,6 +461,7 @@
       /* DELETE PRODUCT SECTION */
 
       public function deleteProduct($prod_id) {
+        echo $prod_id;
         $PRODDB = $this->database->PDOConnection(CoreApp\AppConfig::getData("database=>prodDB"));
         $stmt = $PRODDB->prepare("UPDATE prods SET prod_id = CONCAT(prod_id, '-', 'nincs') WHERE prod_id = :prod_id");
         $stmt->execute(array(
@@ -473,6 +484,67 @@
       }
 
       /* END BACK PRODUCT SECTION */
+
+
+      /* POSITION SECTION */
+
+      public function position($category, $products) {
+
+        
+
+        $PRODDB = $this->database->PDOConnection(CoreApp\AppConfig::getData("database=>prodDB"));
+
+        $GLOBALS["products"] = $products;
+
+        $c_p = count($products);
+        print_r($products);
+
+        $stmt = $PRODDB->prepare("SELECT * FROM category_position WHERE category = :category ORDER BY position LIMIT $c_p ");
+        $stmt->execute(array(
+          ":category" => $category
+        ));
+
+        $old_prods = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        print_r($old_prods);
+
+        function cmp($a, $b) {
+
+        $products = $GLOBALS["products"];
+          
+        $a_p = array_search($a["prod_id"], $products);
+        $b_p = array_search($b["prod_id"], $products);
+          if ($a_p == $b_p) {
+              return 0;
+          }
+          return ($a_p < $b_p) ? -1 : 1;
+      }
+
+        usort($old_prods, "cmp");
+
+        $c_o = count($old_prods);
+
+        $stmt = $PRODDB->prepare("UPDATE category_position SET position = :position WHERE prod_id = :prod_id AND category = :category");
+
+        for ($i=0; $i < $c_o; $i++) { 
+          print_r($old_prods[$i]);
+          $stmt->execute(array(
+            ":position" => $i+1,
+            ":prod_id" => $old_prods[$i]["prod_id"],
+            ":category" => $category
+          ));
+        }
+
+
+
+      }
+
+    
+
+
+
+
+      /* END POSITION SECTION */
 
       public static function v4() {
         return sprintf('%04x-%04x-%04x-%04x',mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff),mt_rand(0, 0xffff));
