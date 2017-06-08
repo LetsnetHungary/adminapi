@@ -5,16 +5,13 @@
       "DB_HOST" : "localhost",
       "DB_PORT" : "3306",
       "DB_NAME" : "mvc",
-      "DB_USER" : "root",
-      "DB_PASS" : "mysql"
+      "DB_USER" : "graphedh_user",
+      "DB_PASS" : "Vr7{kP?8#@bQ"
     }
     ,
-    "visitorsDB" : "mvc_Visitors",
-    "autchenticationDB" : "letsneth_authenticate",
-    "modulesDB" : "mvc",
-    "userDB" : "mvc"
+    "prodDB" : "graphedh_main"
   },
   "timezone" : "Europe/Budapest",
-  "firstpage" : "AuthTest",
+  "firstpage" : "",
   "authentication" : "true"
 }

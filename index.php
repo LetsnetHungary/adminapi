@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 
 require_once("vendor/autoload.php");
 
-define("APPCONFIG", "development");
+define("APPCONFIG", "server");
 
 date_default_timezone_set(CoreApp\AppConfig::getData("timezone"));
 CoreApp\Session::init();
