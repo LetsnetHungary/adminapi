@@ -7,7 +7,7 @@
 
       public function getSells() {
         $PRODDB = $this->database->PDOConnection(CoreApp\AppConfig::getData("database=>prodDB"));
-        $stmt = $PRODDB->prepare("SELECT prods.prod_id, prods.prod_name, sells.stock, sells.webshopstock, sells.webshopsold, sells.marketsold, sells.friendlysold FROM prods INNER JOIN sells ON (prods.prod_id = sells.prod_id) LIMIT 20");
+        $stmt = $PRODDB->prepare("SELECT prods.prod_id, prods.prod_name, sells.stock, sells.webshopstock, sells.webshopsold, sells.marketsold, sells.friendlysold FROM prods INNER JOIN sells ON (prods.prod_id = sells.prod_id) LIMIT 100");
         $stmt->execute();
         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return($r);

@@ -12,18 +12,20 @@
       public function getProductsByCategory($prod_categories, $position) {
 
         $CATDB = $this->database->PDOConnection(CoreApp\AppConfig::getData("database=>prodDB"));
-        $stmt = $CATDB->prepare("SELECT prods.prod_id, prods.prod_name FROM prods INNER JOIN categories ON (prods.prod_id = categories.prod_id) INNER JOIN category_position ON (category_position.prod_id = prods.prod_id) WHERE categories.prod_categories LIKE :prod_categories AND category_position.category = :category GROUP BY prods.prod_id ORDER BY category_position.position LIMIT 20");
+        $stmt = $CATDB->prepare("SELECT prods.prod_id, prods.prod_name FROM prods INNER JOIN categories ON (prods.prod_id = categories.prod_id) INNER JOIN category_position ON (category_position.prod_id = prods.prod_id) WHERE categories.prod_categories LIKE :prod_categories AND category_position.category = :category AND category_position.position >= :position GROUP BY prods.prod_id ORDER BY category_position.position LIMIT 100");
         
         if($prod_categories == "all") {
            $stmt->execute(array(
           ":prod_categories" => "%all%",
-          ":category" => $prod_categories
+          ":category" => $prod_categories,
+          ":position" => $position
         ));
         }
         else {
           $stmt->execute(array(
             ":prod_categories" => "%=>$prod_categories%",
-            ":category" => $prod_categories
+            ":category" => $prod_categories,
+            ":position" => $position
           ));
         }
         return $stmt->fetchAll(PDO::FETCH_ASSOC);  
@@ -174,7 +176,7 @@
           ":prod_id" => $prod_id,
           ":prod_name" => $prod_name,
           ":prod_price" => $prod_price,
-          ":outofstock" => $outofstock
+          ":outofstock" => '0'
         ));  
 
         /* END INSERT TO PRODS TABLE */
@@ -185,6 +187,18 @@
         $stmt->execute(array(
           ":prod_id" => $prod_id
         ));
+
+        $stmt = $PRODDB->prepare("SELECT * FROM category_position WHERE prod_id = :prod_id");
+        $stmt->execute(array(
+          ":prod_id" => $prod_id
+        ));
+        $old_pos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $op = array();
+        $o_p = count($old_pos);
+
+        for ($i=0; $i < $o_p; $i++) {
+          $op[$old_pos[$i]["category"]] = $old_pos[$i]["position"];
+        }
 
         $stmt = $PRODDB->prepare("DELETE FROM category_position WHERE prod_id = :prod_id");
         $stmt->execute(array(
@@ -204,12 +218,16 @@
             $old_categories_names[$i] = $oc[$i]["category_name"];
           }
 
+          /*
+
           $stmt = $PRODDB->prepare("INSERT INTO category_position (prod_id, category, position) VALUES (:prod_id, :category, :position)");
           $stmt->execute(array(
             ":prod_id" => $prod_id,
             ":category" => "all",
             ":position" => 0
           ));
+
+          */
 
           $c_c = count($categories);
           for ($i=0; $i <$c_c; $i++) { 
@@ -229,19 +247,30 @@
                   }
                   $stmt->execute($array);
                 }
+
                 if($k == 0) {
                   $p_categories .= $key;
                 }
                 else {
-                  $stmt = $PRODDB->prepare("INSERT INTO category_position (prod_id, category, position) VALUES (:prod_id, :category, :position)");
+                  $p_categories .= "=>$key";
+                }
+                $k++;
+
+                $stmt = $PRODDB->prepare("INSERT INTO category_position (prod_id, category, position) VALUES (:prod_id, :category, :position)");  
+                if(array_key_exists($key, $op)) {
+                  $stmt->execute(array(
+                    ":prod_id" => $prod_id,
+                    ":category" => $key,
+                    ":position" => $op[$key]
+                  ));
+                }
+                else {
                   $stmt->execute(array(
                     ":prod_id" => $prod_id,
                     ":category" => $key,
                     ":position" => 0
                   ));
-                  $p_categories .= "=>$key";
                 }
-                $k++;
               }
               $stmt = $PRODDB->prepare("INSERT INTO categories (prod_id, prod_categories) VALUES (:prod_id, :prod_categories)");
               $stmt->execute(array(
@@ -490,8 +519,6 @@
 
       public function position($category, $products) {
 
-        
-
         $PRODDB = $this->database->PDOConnection(CoreApp\AppConfig::getData("database=>prodDB"));
 
         $GLOBALS["products"] = $products;
@@ -499,7 +526,7 @@
         $c_p = count($products);
         print_r($products);
 
-        $stmt = $PRODDB->prepare("SELECT * FROM category_position WHERE category = :category ORDER BY position LIMIT $c_p ");
+        $stmt = $PRODDB->prepare("SELECT category_position.position, prods.prod_id FROM category_position INNER JOIN prods ON (category_position.prod_id = prods.prod_id) WHERE category = :category ORDER BY position LIMIT $c_p ");
         $stmt->execute(array(
           ":category" => $category
         ));
@@ -538,12 +565,6 @@
 
 
       }
-
-    
-
-
-
-
       /* END POSITION SECTION */
 
       public static function v4() {

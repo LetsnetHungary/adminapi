@@ -1,6 +1,7 @@
 <?php
 
   class productsapi extends CoreApp\InnerController {
+    
       public function __construct() {
         parent::__construct(__CLASS__);
         $this->model = $this->loadModel(__CLASS__);
@@ -28,9 +29,8 @@
       }
 
       public function position() {
-        $c = $_POST["category"];
+        $c = isset($_POST["category"]) ? $_POST["category"] : 0;
         $prods = $_POST["products"];
-
         $this->model->position($c, $prods);
       }
 
