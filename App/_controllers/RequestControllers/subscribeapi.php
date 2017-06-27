@@ -7,7 +7,7 @@
         }
 
         public function newsubscribe() {
-            $p = $_POST["data"];
+            $p = $_POST;
             $this->model->uploadNewSubscribe($p);
         }
     }
