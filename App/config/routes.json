@@ -8,6 +8,4 @@
     {"href" : "Sell", "closure" : "mvc", "controller" : "sellapi",  "order" : ["{method}", "{argument}", "{argument}"]},
     {"href" : "Subscribe", "closure" : "mvc", "controller" : "subscribeapi",  "order" : ["{method}", "{argument}", "{argument}"]},
     {"href" : "HTTPError", "closure" : "mvc", "controller" : "Error",  "order" : ["{method}", "{argument}", "{argument}"]}
-
-
 ]

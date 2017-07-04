@@ -20,7 +20,6 @@
                 $closure_to_call = $this->closure_to_call;
                 $$closure_to_call($this->route->info);
 
-                CoreApp\Session::init();
 
             }
 
