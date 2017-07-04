@@ -1,0 +1,22 @@
+{
+    "routesF" : "App/config/routes.json",
+    "routingClosuresF" : "App/RoutingClosures.php",
+    "database" : {
+        "config" : {
+            "DB_TYPE" : "mysql",
+            "DB_HOST" : "localhost",
+            "DB_PORT" : "3306",
+            "DB_NAME" : "mvc",
+            "DB_USER" : "root",
+            "DB_PASSWORD" : "root"
+        },
+        "prodDB" : "products",
+        "autchenticationDB" : "letsneth_authenticate",
+        "modulesDB" : "letsneth_modules",
+        "dataDB" : "letsneth_data"
+      },
+      "timezone" : "Europe/Budapest",
+      "firstpage" : "AuthTest",
+      "authentication" : "true",
+      "loginsessions" : ["logged_user", "uniquekey", "devicekey", "allow", "sitekey"]
+}

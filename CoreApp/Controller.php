@@ -1,61 +1,52 @@
-<?php
+<?
 
-namespace CoreApp;
-use \CoreApp\Model;
+    namespace CoreApp;
 
-	abstract class Controller {
-		public $model;
+        class Controller {
 
-		public function ClassName($class) {
-			return substr(strrchr($class, "\\"), 1);
-		}
 
-		protected function loadModel($objectname) {
-			$modelName = $objectname.'_Model';
-			$modelFileName = "App/_models/$modelName.php";
-			$coreAppModelFileName = "CoreApp/_models/$modelName.php";
+            public $routeINFO;
 
-			if(file_exists($modelFileName)) {
-				require $modelFileName;
-				$this->modelDidLoad();
-				return new $modelName();;
-			}
-			else if(file_exists($coreAppModelFileName)){
-				require($coreAppModelFileName);
-				$m = "CoreApp\Model\\".$modelName;
-				//$this->modelDidLoad();
-				return new $m();
-			}
-			else {
-				$this->model = null;
-			}
+            protected $model;
+            protected $view;
 
-		}
+            public function __construct() {
+                $this->view = NULL;
+                $this->model = [];
+                $this->routeINFO = [];
+            }
 
-    protected function setAuthentication() {
-      $this->authentication = Appconfig::getData("authentication");
-      if($this->authentication) {
-          //autchentication on
-          $a = new \CoreApp\Controller\Authentication();
-					return $a;
-      }
-			return null;
-    }
+            protected function loadModel($modelName) {
+                $modelName .= '_Model';
+                $modelF = "App/Models/".$modelName.".php";
+                if(file_exists($modelF)) {
+                    require($modelF);
+                    $this->model = new $modelName();
+                }
+                return NULL;
+            }
 
-		public function PageModulesPHP($sitekey, $pagemodules) {
-			$c_p = count($pagemodules);
-			for($i=0; $i < $c_p; $i++) {
-				$path = "_cms/$sitekey/modules/php/".$pagemodules[$i]["viewid"]."/".$pagemodules[$i]["module"].".php";
-				$this->includePagemodulPHP($path);
-			}
-		}
+            protected function setAuthentication() {
+              $this->authentication = Appconfig::getData("authentication");
+              if($this->authentication) {
+                  //autchentication on
+                  $a = new \CoreApp\Controller\Authentication();
+                  return $a;
+              }
+              return null;
+            }
 
-		private function includePagemodulPHP($path) {
-			include($path);
-			return;
-		}
+            public function PageModulesPHP($sitekey, $pagemodules) {
+              $c_p = count($pagemodules);
+              for($i=0; $i < $c_p; $i++) {
+                $path = "_cms/$sitekey/modules/php/".$pagemodules[$i]["viewid"]."/".$pagemodules[$i]["module"].".php";
+                $this->includePagemodulPHP($path);
+              }
+            }
 
-		protected function modelDidLoad() {
+            private function includePagemodulPHP($path) {
+              include($path);
+              return;
+            }
 
-		}
-	}
+        }

@@ -9,7 +9,7 @@ use \PDO;
 	    private $config;
 
 		public function __construct() {
-			$this->config = AppConfig::getData("database=>config");
+			$this->config = AppConfig::getData("database=>basic");
 			return;
 		}
 
