@@ -1,7 +1,7 @@
 <?php
 
   class debugapi extends CoreApp\Controller {
-      public function __construct() {
+      public function __construct($info) {
         parent::__construct(__CLASS__);
         $this->loadModel(__CLASS__);
       }

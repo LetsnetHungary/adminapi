@@ -13,7 +13,7 @@
         public function addStock() {
           $prod_id = $_POST["prod_id"];
           $count = $_POST["count"];
-          $this->model->addStock($prod_id, $count);
+          $this->model->addStock(ct($info)d_id, $count);
         }
 
         public function addWebshopStock() {
