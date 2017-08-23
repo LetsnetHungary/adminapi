@@ -1,35 +1,31 @@
 <?php
 
-    class ordersapi extends CoreApp\Controller {
+      require("App/Models/ordersapi_Model.php");
+      $model = new ordersapi_Model();
+      $router = new CoreApp\Router();
 
-      public function __construct($info) {
-        parent::__construct(__CLASS__);
-        $this->loadModel(__CLASS__);
-      }
+      $router->post("getOrders", TRUE, function() {
+          echo json_encode($model->getOrders());
+      });
 
-      public function getOrders() {
-        echo json_encode($this->model->getOrders());
-      }
+      $router->post("viewOrder", TRUE, function() {
+           if(isset($_POST["id"])) {
+               $id = $_POST["id"];
+               $a = $model->viewOrder($id);
+               echo(json_encode($a));
+           }
+           else {
+               echo "Nincs választott termék!";
+           }
+      });
 
-      public function viewOrder() {
-         if(isset($_POST["id"])) {
-             $id = $_POST["id"];
-             $a = $this->model->viewOrder($id);
-             echo(json_encode($a));
-         }
-         else {
-             echo "Nincs választott termék!";
-         }
-       }
+      $router->post("setState", TRUE, function() {
+        $id = $_POST["id"];
+        $state = $_POST["state"];
+        $model->setState($id, $state);
+      });
 
-       public function setState() {
-         $id = $_POST["id"];
-         $state = $_POST["state"];
-         $this->model->setState($id, $state);
-       }
-
-       public function notVisible() {
-         $id = $_POST["id"];
-         $this->model->notVisible($id);
-       }
-    }
+      $router->post("notVisible", TRUE, function() {
+          $id = $_POST["id"];
+          $model->notVisible($id);
+      });

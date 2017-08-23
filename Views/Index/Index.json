@@ -1,0 +1,21 @@
+{
+	"css" : [
+		"../../assets/css/Index.css"
+  ],
+	"js" : [
+		"../../assets/js/Index.js"
+  ],
+  "fonts" : [
+	],
+	"seo" :
+	{
+		"title" : "Index",
+		"charset" : "UTF-8",
+		"meta" : {
+			"description" : "This is the test Index page"
+		},
+		"og" : {
+
+		}
+	}
+}

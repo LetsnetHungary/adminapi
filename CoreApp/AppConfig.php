@@ -14,7 +14,7 @@
 
 		class AppConfig {
 
-			private static $appconfig_real_file = "App/config/_appconfig_real.json";
+			private static $appconfig_real_file = "App/config/appconfig_real.json";
 
 			/**
 			* The function returns to JSON object by default

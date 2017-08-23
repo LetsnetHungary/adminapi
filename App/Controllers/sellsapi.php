@@ -1,30 +1,27 @@
 <?php
 
-  class sellsapi extends CoreApp\Controller {
-      public function __construct() {
-          parent::__construct(__CLASS__);
-          $this->loadModel(__CLASS__);
-    		}
+      require("App/Models/sellsapi_Model.php");
+      $model = new sellsapi_Model();
+      $router = new CoreApp\Router();
 
-        public function getSells() {
-          echo json_encode($this->model->getSells());
-        }
+      $router->post("getSells", TRUE, function() {
+          echo json_encode($model->getSells());
+      });
 
-        public function addStock() {
-          $prod_id = $_POST["prod_id"];
-          $count = $_POST["count"];
-          $this->model->addStock(ct($info)d_id, $count);
-        }
+      $router->post("addStock", TRUE, function() {
+        $prod_id = $_POST["prod_id"];
+        $count = $_POST["count"];
+        $model->addStock(ct($info)d_id, $count);
+      });
 
-        public function addWebshopStock() {
-          $prod_id = $_POST["prod_id"];
-          $count = $_POST["count"];
-          $this->model->addWebshopStock($prod_id, $count);
-        }
+      $router->post("addWebshopStock", TRUE, function() {
+        $prod_id = $_POST["prod_id"];
+        $count = $_POST["count"];
+        $model->addWebshopStock($prod_id, $count);
+      });
 
-        public function addFriendlySold() {
-          $prod_id = $_POST["prod_id"];
-          $count = $_POST["count"];
-          $this->model->addFriendlySold($prod_id, $count);
-        }
-  }
+      $router->post("addFriendlySold", TRUE, function() {
+        $prod_id = $_POST["prod_id"];
+        $count = $_POST["count"];
+        $model->addFriendlySold($prod_id, $count);
+      });

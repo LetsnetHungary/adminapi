@@ -1,0 +1,26 @@
+{
+	"css" :[
+		"../../assets/bootstrap/css/bootstrap.min.css",
+		"../../assets/css/Error.css"
+    ],
+	"js" :[
+    ],
+    "fonts" : [
+		"https://fonts.googleapis.com/css?family=Roboto:300,400,500"
+	],
+	"seo" :
+	{
+		"title" : "Error Page",
+		"charset" : "UTF-8",
+
+		"meta" :
+		{
+			"description" : "Ooops! The page you requested was not found!"
+		},
+
+		"og" :
+		{
+
+		}
+	}
+}

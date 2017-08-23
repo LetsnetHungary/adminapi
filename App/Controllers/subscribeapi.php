@@ -1,13 +1,10 @@
 <?php
 
-    class subscribeapi extends CoreApp\Controller {
-        public function __construct($info) {
-            parent::__construct(__CLASS__);
-            $this->loadModel(__CLASS__);
-        }
+      require("App/Models/subscribeapi_Model.php");
+      $model = new subscribeapi_Model();
+      $router = new CoreApp\Router();
 
-        public function newsubscribe() {
-            $p = $_POST;
-            $this->model->uploadNewSubscribe($p);
-        }
-    }
+      $router->post("newsubscribe", TRUE, function() {
+          $p = $_POST;
+          $model->uploadNewSubscribe($p);
+      });

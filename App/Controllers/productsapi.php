@@ -1,45 +1,41 @@
 <?php
 
-  class productsapi extends CoreApp\Controller {
+      require("App/Models/productsapi_Model.php");
+      $model = new productsapi_Model();
+      $router = new CoreApp\Router();
 
-      public function __construct($info) {
-        parent::__construct(__CLASS__);
-        $this->loadModel(__CLASS__);
-      }
-
-      public function getProductsByCategory() {
+      $router->post("getProductsByCategory", TRUE, function() {
         $category_from = $_POST["id"];
         $position = $_POST["position"];
-        print_r(json_encode($this->model->getProductsByCategory($category_from, $position)));
-      }
+        print_r(json_encode($model->getProductsByCategory($category_from, $position)));
+      });
 
-      public function getOneProduct() {
+      $router->post("getOneProduct", TRUE, function() {
         $prod_id = $_POST["prodid"];
-        print_r($this->model->getOneProduct($prod_id));
-      }
+        print_r($model->getOneProduct($prod_id));
+      });
 
-      public function uploadProduct() {
+      $router->post("uploadProduct", TRUE, function() {
         $product = $_POST["product"];
-        print_r($this->model->uploadProduct($product));
-      }
+        print_r($model->uploadProduct($product));
+      });
 
-      public function deleteProduct() {
+      $router->post("deleteProduct", TRUE, function() {
         $a = $_POST["prodid"];
-        $this->model->deleteProduct($a);
-      }
+        $model->deleteProduct($a);
+      });
 
-      public function position() {
+      $router->post("position", TRUE, function() {
         $c = isset($_POST["category"]) ? $_POST["category"] : 0;
         $prods = $_POST["products"];
-        $this->model->position($c, $prods);
-      }
+        $model->position($c, $prods);
+      });
 
-      public function backProduct() {
+      $router->post("backProduct", TRUE, function() {
         $a = $_POST["prod_id"];
-        $this->model->backProduct($a);
-      }
+        $model->backProduct($a);
+      });
 
-      public function getLabels() {
-        print_r($this->model->getLabels());
-      }
-  }
+      $router->post("getlabels", TRUE, function() {
+          print_r($model->getLabels());
+      });

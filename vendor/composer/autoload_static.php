@@ -4,26 +4,21 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit8140dbf49c4f605b69186a4ff60de746
+class ComposerStaticInitffb82d0b6b082c8a2ae3c912729f1349
 {
-    public static $files = array (
-        'a4406ac832814ce6b4087f95745515ed' => __DIR__ . '/../..' . '/CoreApp/GF.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
         'C' => 
         array (
             'CoreApp\\Model\\' => 14,
             'CoreApp\\Controller\\' => 19,
             'CoreApp\\' => 8,
-            'Controller\\' => 11,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
         'CoreApp\\Model\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/CoreApp/_models',
+            0 => __DIR__ . '/../..' . '/CoreAll/_models',
         ),
         'CoreApp\\Controller\\' => 
         array (
@@ -33,19 +28,13 @@ class ComposerStaticInit8140dbf49c4f605b69186a4ff60de746
         array (
             0 => __DIR__ . '/../..' . '/CoreApp',
         ),
-        'Controller\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/Controllers/ViewControllers',
-            1 => __DIR__ . '/../..' . '/Controllers/InnerControllers',
-            2 => __DIR__ . '/../..' . '/Controllers/RequestControllers',
-        ),
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit8140dbf49c4f605b69186a4ff60de746::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit8140dbf49c4f605b69186a4ff60de746::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitffb82d0b6b082c8a2ae3c912729f1349::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitffb82d0b6b082c8a2ae3c912729f1349::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }

@@ -1,0 +1,12 @@
+{
+    "name" : "letsnet/mvc",
+    "require" : {
+    },
+    "autoload": {
+        "psr-4": {
+            "CoreApp\\": "CoreApp/",
+            "CoreApp\\Controller\\" : "CoreApp/_controllers/",
+            "CoreApp\\Model\\" : "CoreAll/_models/"
+        }
+    }
+}

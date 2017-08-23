@@ -1,13 +1,10 @@
 <?php
 
-  class categoryapi extends CoreApp\Controller {
-      public function __construct($info) {
-        parent::__construct(__CLASS__);
-        $this->loadModel(__CLASS__);
-      }
+      require("App/Models/categoryapi_Model.php");
+      $model = new categoryapi_Model();
+      $router = new CoreApp\Router();
 
-      public function getCategory() {
-        $category_from = $_POST["id"];
-        print_r(json_encode($this->model->getCategory($category_from)));
-      }
-  }
+      $router->post("getCategory", TRUE, function() {
+          $category_from = $_POST["id"];
+          print_r(json_encode($model->getCategory($category_from)));
+      });

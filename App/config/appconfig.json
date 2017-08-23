@@ -1,0 +1,16 @@
+/*sample*/
+/* másolni kell appconfig_real.json fájlra */
+{
+    "routesF" : "App/config/routes.json",
+    "routingClosuresF" : "App/RoutingClosures.php",
+    "database" : {
+        "config" : {
+            "DB_TYPE" : "mysql",
+            "DB_HOST" : "127.0.0.1",
+            "DB_PORT" : "3306",
+            "DB_NAME" : "****",
+            "DB_USER" : "****",
+            "DB_PASSWORD" : "****"
+        }
+    }
+}

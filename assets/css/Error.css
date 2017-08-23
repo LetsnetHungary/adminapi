@@ -1,0 +1,20 @@
+main {
+    font-family: 'Roboto', sans-serif!important;
+    display: flex;
+    justify-content: center;
+    align-items : center;
+    height: 700px;
+}
+
+h1 {
+    font-weight: 500!important;
+}
+
+h2 {
+    font-weight: 300!important;
+}
+
+img {
+    margin: 100px 0 0 0;
+    max-width: 200px;
+}

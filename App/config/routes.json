@@ -1,11 +1,6 @@
 [
-    {"href" : "Category", "closure" : "mvc", "controller" : "categoryapi",  "order" : ["{method}", "{argument}", "{argument}"]},
-    {"href" : "CMS", "closure" : "mvc", "controller" : "CMSAPI",  "order" : ["{method}", "{argument}", "{argument}"]},
-    {"href" : "Comission", "closure" : "mvc", "controller" : "comissionapi",  "order" : ["{method}", "{argument}", "{argument}"]},
-    {"href" : "Debug", "closure" : "mvc", "controller" : "debugapi",  "order" : ["{method}", "{argument}", "{argument}"]},
-    {"href" : "Order", "closure" : "mvc", "controller" : "ordersapi",  "order" : ["{method}", "{argument}", "{argument}"]},
-    {"href" : "Products", "closure" : "mvc", "controller" : "productsapi",  "order" : ["{method}", "{argument}", "{argument}"]},
-    {"href" : "Sell", "closure" : "mvc", "controller" : "sellapi",  "order" : ["{method}", "{argument}", "{argument}"]},
-    {"href" : "Subscribe", "closure" : "mvc", "controller" : "subscribeapi",  "order" : ["{method}", "{argument}", "{argument}"]},
-    {"href" : "HTTPError", "closure" : "mvc", "controller" : "Error",  "order" : ["{method}", "{argument}", "{argument}"]}
+    {"href" : "HTTPError", "closure" : "static", "view" : "Error"},
+    {"href" : "Index", "closure" : "static", "view" : "Index"},
+    {"href" : "admin/login", "closure" : "static", "view" : "Login"},
+    {"href" : "Index/mvc", "closure" : "mvc", "controller" : "Index", "view" : "Index", "order" : ["{method}", "{argument}", "{argument}"]}
 ]

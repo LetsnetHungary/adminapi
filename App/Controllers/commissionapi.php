@@ -1,40 +1,39 @@
 <?php
 
-  class commissionapi extends CoreApp\Controller {
-      public function __construct($info) {
-        parent::__construct(__CLASS__);
-        $this->loadModel(__CLASS__);
-      }
+      $router = new CoreApp\Router();
 
-      public function getCommissions() {
-  			echo json_encode($this->model->getCommission());
-  		}
 
-  		public function getProducts() {
-  			echo json_encode($this->model->getProducts());
-  		}
+      require("App/Models/comissionapi_Model.php");
+      $model = new comissionapi_Model();
 
-  		public function getShops() {
-  			echo json_encode($this->model->getShops());
-  		}
+      $router->post("getComissions", TRUE, function() {
+          echo json_encode($model->getCommission());
+      });
 
-  		public function getPrices() {
-  			echo json_encode($this->model->getPrices());
-  		}
+      $router->post("getProducts", TRUE, function() {
+          echo json_encode($model->getProducts());
+      });
 
-      public function addCommission() {
-        $data = $_POST;
-        $this->model->addCommission($data);
-      }
+      $router->post("getShops", TRUE, function() {
+          echo json_encode($model->getShops());
+      });
 
-      public function deleteCommission() {
-        $id = $_POST["id"];
-        $this->model->deleteCommission($id);
-      }
+      $router->post("getPrices", TRUE, function() {
+          echo json_encode($model->getPrices());
+      });
 
-      public function refreshCount() {
+      $router->post("addComission", TRUE, function() {
+          $data = $_POST;
+          $model->addCommission($data);
+      });
+
+      $router->post("deleteComissions", TRUE, function() {
+          $id = $_POST["id"];
+          $model->deleteCommission($id);
+      });
+
+      $router->post("refreshCount", TRUE, function() {
         $id = $_POST["id"];
         $count = $_POST["count"];
-        $this->model->refreshCount($id, $count);
-      }
-  }
+        $model->refreshCount($id, $count);
+      });
